@@ -123,7 +123,7 @@ class Simply_order_mcp {
 	$data['channel_id'] = '2';
 
 	$entries = $this->_get_channel_entries($data);
-	if($entries) {
+	if ($entries) {
 	    $vars['entries'] = $entries;
 	    return $this->content_wrapper('edit_single', 'edit_single', $vars);
 	} else {
@@ -146,6 +146,10 @@ class Simply_order_mcp {
 	$vars['content_view'] = $content_view;
 	$vars['_base'] = $this->_base_url;
 	$vars['_form_base'] = $this->_form_base;
+	
+	// Add assets to the head:
+	$this->_add_assets();
+	
 	// If you provide a title extra in the calling function you get .. an extra title
 	$title_extra = (isset($vars['title_extra'])) ? ': ' . $vars['title_extra'] : '';
 
@@ -213,12 +217,28 @@ class Simply_order_mcp {
 	    return $query;
 	}
     }
+
     /*
      * This function add js scripts and 
      */
-    private function _add_assets(){
-	$this->EE->cp->add_to_head('<link type="text/css" href="'.$this->theme_base.'css/simply_order.css" rel="stylesheet" />');
+
+    private function _add_assets() {
+	$this->EE->cp->add_to_head('<link type="text/css" href="' . $this->theme_base . 'css/simply_order.css" rel="stylesheet" />');
+
+	$js_script = "<script type='text/javascript'>";
+	$js_script .= "$(document).ready(function(){ 					   
+			$(function() {
+			    $('#availables .element').droppable({ 
+					opacity: 0.6, 
+					cursor: 'move'			    
+				});
+			    });
+			});";
+	$js_script .= "</script>";
+	
+	$this->EE->cp->add_to_head($js_script);
     }
+    
 
 }
 
