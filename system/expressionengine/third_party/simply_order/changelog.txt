@@ -1,0 +1,20 @@
+Version 0.8 (2011-09-06)
+    Added supports for more than one custom order
+    
+Version 0.7 (2011-09-06)
+    Renamed "suggestor" in "stage_whisper"
+    Added more comments to the code
+    Added readme file on github
+    Edited the content_wrapper function
+
+Version 0.7 (2011-09-05)
+    Rewrited the mcp file.
+    Added new wrapper for the views files.
+    Added new function "suggestor" to have a list of entries in the entry order form.
+    
+
+Versio 0.5  (2011-08-12)
+    Initial release.
+
+
+    
