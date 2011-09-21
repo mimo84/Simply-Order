@@ -24,11 +24,17 @@ This is an EE2 module.
 How to use
 ----------
 
-1. create a new folder ‘simply_order’ inside /system/expressionengine/third_party/
-2. upload simply order files here (whitout Simply-order-for-ExpressionEngine folder)
-3. On the EE panel click on  ‘add-ons->modules->simply_order->install’.
-4. Once installed click on ‘Simply Order’ in the modules page
-5. Insert entry IDs separed by a ‘|’
+# Important note:
+   Actually the module has channel 2 on site 1 fixed. If you would like to change, 
+   edit the file mcp.simply_order.php at lines 122 and 123:
+   (`$data['site_id'] = '1';`)
+   (`$data['channel_id'] = '2';`)
+
+1. Download the file, and unzip it into your EE installation following folder's structure.
+2. On the EE panel click on  ‘add-ons->modules->simply_order->install’.
+3. Once installed click on ‘Simply Order’ in the modules page
+4. Insert a new order, with a tag, and then you'll be able to edit that order.
+
 6. In your template use an embed to avoid variables parsing order:
    On the main template:
 
