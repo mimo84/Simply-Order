@@ -224,19 +224,7 @@ class Simply_order_mcp {
 
     private function _add_assets() {
 	$this->EE->cp->add_to_head('<link type="text/css" href="' . $this->theme_base . 'css/simply_order.css" rel="stylesheet" />');
-
-	$js_script = "<script type='text/javascript'>";
-	$js_script .= "$(document).ready(function(){ 					   
-			$(function() {
-			    $('#availables .element').droppable({ 
-					opacity: 0.6, 
-					cursor: 'move'			    
-				});
-			    });
-			});";
-	$js_script .= "</script>";
 	
-	// $this->EE->cp->add_to_head($js_script);
     }
     
 
