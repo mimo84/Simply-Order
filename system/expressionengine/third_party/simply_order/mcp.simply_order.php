@@ -130,10 +130,20 @@ class Simply_order_mcp {
 	    $this->index();
 	}
     }
+    
+    function edit_single() {
 
-    /*     * ******************************************
+	$vars['entry_id'] = $this->EE->input->post('entry_id_');
+	
+	$vars['cp_page_title'] = $this->EE->lang->line('edit_single');
+	
+
+	return $this->content_wrapper('single_edited', 'edit_single', $vars);
+    }
+
+    /**********************************************
      * FUNCTIONS TO GET HELP IN OTHER FUNCTIONS
-     * ****************************************** */
+     **********************************************/
 
     /*
      * New content wrapper to call the view file.

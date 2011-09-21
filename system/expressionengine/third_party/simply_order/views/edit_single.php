@@ -5,18 +5,19 @@ $(document).ready(function(){
 	$("#sortable1, #sortable2").sortable({ 
 	    opacity: 0.6,
 	    cursor: 'move',
-	    connectWith: ".connectedSortable",
-		
-	    update: function() {
-		var order = $("#sortable2").sortable("serialize");
-		alert(order); 
-	    }
+	    connectWith: ".connectedSortable"
 	});
     });
+    
+    function maurizio(){
+	var order = $("#sortable2").sortable("serialize");
+	alert(order);
+    }
 	
 });
 </script>
 <h3>Current entries in the channel:</h3>
+<a onclick="maurizio()">Click Me</a>
 <ul id="sortable1" class="connectedSortable">
     <li class="ui-state-default">Entries you have:</li>
     <? foreach ($entries->result_array() as $single_one) { ?>
