@@ -236,7 +236,7 @@ class Simply_order_mcp {
 			});";
 	$js_script .= "</script>";
 	
-	$this->EE->cp->add_to_head($js_script);
+	// $this->EE->cp->add_to_head($js_script);
     }
     
 
