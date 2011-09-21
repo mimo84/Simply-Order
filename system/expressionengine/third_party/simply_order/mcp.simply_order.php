@@ -137,8 +137,9 @@ class Simply_order_mcp {
 	
 	$vars['cp_page_title'] = $this->EE->lang->line('edit_single');
 	
-
-	return $this->content_wrapper('single_edited', 'edit_single', $vars);
+	$vars['ajax'] = 'test_message';
+	return $this->EE->output->send_ajax_response($vars); 
+	// return $this->content_wrapper('single_edited', 'edit_single', $vars);
     }
 
     /**********************************************

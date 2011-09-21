@@ -1,23 +1,33 @@
 <h1>Insert or remove entries.</h1>
+
+<? echo BASE . $form_action; ?>
+
 <script type="text/javascript">
-$(document).ready(function(){
-    $(function() {
-	$("#sortable1, #sortable2").sortable({ 
-	    opacity: 0.6,
-	    cursor: 'move',
-	    connectWith: ".connectedSortable"
-	});
-    });
-    
     function maurizio(){
-	var order = $("#sortable2").sortable("serialize");
-	alert(order);
-    }
-	
-});
+	    var order = $("#sortable2").sortable("serialize");
+	    $.ajax({
+		type: "GET",
+		dataType: "json",
+		url: "<? echo BASE . $form_action; ?>",
+		data: order
+	    })
+	};
+    
+    $(document).ready(function(){
+	$(function() {
+	    $("#sortable1, #sortable2").sortable({ 
+		opacity: 0.6,
+		cursor: 'move',
+		connectWith: ".connectedSortable"
+	    });
+	});
+		
+    });
 </script>
 <h3>Current entries in the channel:</h3>
-<a onclick="maurizio()">Click Me</a>
+
+<a onclick="maurizio();">CLICK ME</a>
+
 <ul id="sortable1" class="connectedSortable">
     <li class="ui-state-default">Entries you have:</li>
     <? foreach ($entries->result_array() as $single_one) { ?>
@@ -30,11 +40,13 @@ $(document).ready(function(){
     <? } ?>
 </ul>
 
-<? 
+<?
 $attributes = array(
     'id' => 'ordering'
 );
-echo form_open($form_action, $attributes); ?>
+echo form_open($form_action, $attributes);
+?>
+
 <ul id="sortable2" class="connectedSortable">
     <li class="ui-state-default">Desidered order.</li>
 </ul>
