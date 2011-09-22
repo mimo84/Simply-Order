@@ -19,6 +19,6 @@
     </div>
 </div>
 <? } else { ?>
-<h2>New ordering added.</h2>
+<h2>Tutt'appost</h2>
 
 <? } ?>

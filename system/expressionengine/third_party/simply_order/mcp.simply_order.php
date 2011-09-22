@@ -62,9 +62,10 @@ class Simply_order_mcp {
 	    foreach ($data['query']->result_array() as $row) {
 		$vars['list'][$row['id_simply_order']]['id'] = $row['id_simply_order'];
 		$vars['list'][$row['id_simply_order']]['site_id'] = $row['site_id'];
+		$vars['list'][$row['id_simply_order']]['order_tag'] = $row['order_tag'];
 	    }
 
-	    $vars['list'][$row['id_simply_order']]['order_tag'] = $row['order_tag'];
+	    
 	    $vars['cp_page_title'] = $this->EE->lang->line('Edit orders');
 	    $vars['form_action'] = $this->_form_base . AMP . 'method=update_record';
 
