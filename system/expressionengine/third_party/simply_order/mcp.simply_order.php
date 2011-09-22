@@ -133,10 +133,13 @@ class Simply_order_mcp {
     
     function edit_single() {
 
-	$vars['entry_id'] = $this->EE->input->post('entry_id_');
+	$vars['post']=$this->EE->input->post();
+	$vars['get']=$this->EE->input->get(NULL, FALSE);
+	
+	$vars['entries'] = $this->EE->input->post('entry_order');
+	
 	
 	$vars['cp_page_title'] = $this->EE->lang->line('edit_single');
-	
 	$vars['ajax'] = 'test_message';
 	return $this->EE->output->send_ajax_response($vars); 
 	// return $this->content_wrapper('single_edited', 'edit_single', $vars);

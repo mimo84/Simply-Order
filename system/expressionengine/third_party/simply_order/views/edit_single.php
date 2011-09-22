@@ -4,14 +4,14 @@
 
 <script type="text/javascript">
     function maurizio(){
-	    var order = $("#sortable2").sortable("serialize");
-	    $.ajax({
-		type: "GET",
-		dataType: "json",
-		url: "<? echo BASE . $form_action; ?>",
-		data: order
-	    })
-	};
+	var order = $("#sortable2").sortable("serialize");
+	return order;
+    };
+	
+    function mimo_alert(){
+	var alert_variable = $("#sortable2").sortable("serialize");
+	alert(alert_variable);
+    }
     
     $(document).ready(function(){
 	$(function() {
@@ -26,7 +26,7 @@
 </script>
 <h3>Current entries in the channel:</h3>
 
-<a onclick="maurizio();">CLICK ME</a>
+<a onclick="document.getElementById('entry_order').value=maurizio();mimo_alert();">CLICK ME</a>
 
 <ul id="sortable1" class="connectedSortable">
     <li class="ui-state-default">Entries you have:</li>
@@ -42,7 +42,7 @@
 
 <?
 $attributes = array(
-    'id' => 'ordering'
+    'id' => 'ordering',
 );
 echo form_open($form_action, $attributes);
 ?>
@@ -50,5 +50,7 @@ echo form_open($form_action, $attributes);
 <ul id="sortable2" class="connectedSortable">
     <li class="ui-state-default">Desidered order.</li>
 </ul>
+<input type="text" id="entry_order" name="entry_order" value="" />
+<? // echo form_input('entry_order', ''); ?>
 <? echo form_submit('submit', 'Submit', 'class="submit"'); ?>
 <? echo form_close(); ?>
