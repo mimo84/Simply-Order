@@ -7,11 +7,6 @@
 	var order = $("#sortable2").sortable("serialize");
 	return order;
     };
-	
-    function mimo_alert(){
-	var alert_variable = $("#sortable2").sortable("serialize");
-	alert(alert_variable);
-    }
     
     $(document).ready(function(){
 	$(function() {
@@ -46,7 +41,8 @@ $attributes = array(
 );
 echo form_open($form_action, $attributes);
 ?>
-
+<input type="hidden" name="site_id" value="<? echo $site_id; ?>"/>
+<input type="hidden" name="id_simply" value="<? echo $id_simply; ?>"/>
 <ul id="sortable2" class="connectedSortable">
     <li class="ui-state-default">Desidered order.</li>
 </ul>

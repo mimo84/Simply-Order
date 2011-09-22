@@ -61,10 +61,10 @@ class Simply_order_mcp {
 	if ($data['query']) {
 	    foreach ($data['query']->result_array() as $row) {
 		$vars['list'][$row['id_simply_order']]['id'] = $row['id_simply_order'];
-		$vars['list'][$row['id_simply_order']]['order_tag'] = $row['order_tag'];
 		$vars['list'][$row['id_simply_order']]['site_id'] = $row['site_id'];
 	    }
 
+	    $vars['list'][$row['id_simply_order']]['order_tag'] = $row['order_tag'];
 	    $vars['cp_page_title'] = $this->EE->lang->line('Edit orders');
 	    $vars['form_action'] = $this->_form_base . AMP . 'method=update_record';
 
@@ -130,27 +130,31 @@ class Simply_order_mcp {
 	    $this->index();
 	}
     }
-    
+    /*
+     * 
+     * 
+     */
     function edit_single() {
-	
-	$vars['entries'] = $this->EE->input->post('entry_order');
-	
-	$fields = explode("&",$vars['entries']);
-	$i = 0;
-	foreach($fields as $field){
-	    $vars['id'] = $i++;
-	    $vars['field'] = $field;
+
+	$entry_ids = $this->EE->input->post('entry_order');
+
+	$vars['id_simply_order'] = $this->EE->input->post('id_simply');
+
+	$coppie = explode("&", $entry_ids);
+	foreach ($coppie as $coppia) {
+	    $coppia_valori = explode("=", $coppia);
+	    $valore = urldecode($coppia_valori[1]);
+	    // eval("$$key = \"$value\";");
+	    echo $valore . " ";
 	}
+
 	
-	
-	
-	return $this->EE->output->send_ajax_response($vars); 
 	// return $this->content_wrapper('single_edited', 'edit_single', $vars);
     }
 
-    /**********************************************
+    /*     * ********************************************
      * FUNCTIONS TO GET HELP IN OTHER FUNCTIONS
-     **********************************************/
+     * ******************************************** */
 
     /*
      * New content wrapper to call the view file.
@@ -163,10 +167,10 @@ class Simply_order_mcp {
 	$vars['content_view'] = $content_view;
 	$vars['_base'] = $this->_base_url;
 	$vars['_form_base'] = $this->_form_base;
-	
+
 	// Add assets to the head:
 	$this->_add_assets();
-	
+
 	// If you provide a title extra in the calling function you get .. an extra title
 	$title_extra = (isset($vars['title_extra'])) ? ': ' . $vars['title_extra'] : '';
 
@@ -241,9 +245,7 @@ class Simply_order_mcp {
 
     private function _add_assets() {
 	$this->EE->cp->add_to_head('<link type="text/css" href="' . $this->theme_base . 'css/simply_order.css" rel="stylesheet" />');
-	
     }
-    
 
 }
 

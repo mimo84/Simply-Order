@@ -95,7 +95,7 @@ class Simply_order_upd {
 	    ),
 	    'entry_id' => array(
 		'type' => 'INT',
-		'constraint' => '100',
+		'constraint' => '11',
 	    ),
 	    'id_simply_order' => array(
 		'type' => 'INT',
