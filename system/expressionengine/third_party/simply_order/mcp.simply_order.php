@@ -132,15 +132,18 @@ class Simply_order_mcp {
     }
     
     function edit_single() {
-
-	$vars['post']=$this->EE->input->post();
-	$vars['get']=$this->EE->input->get(NULL, FALSE);
 	
 	$vars['entries'] = $this->EE->input->post('entry_order');
 	
+	$fields = explode("&",$vars['entries']);
+	$i = 0;
+	foreach($fields as $field){
+	    $vars['id'] = $i++;
+	    $vars['field'] = $field;
+	}
 	
-	$vars['cp_page_title'] = $this->EE->lang->line('edit_single');
-	$vars['ajax'] = 'test_message';
+	
+	
 	return $this->EE->output->send_ajax_response($vars); 
 	// return $this->content_wrapper('single_edited', 'edit_single', $vars);
     }
@@ -156,7 +159,7 @@ class Simply_order_mcp {
 
     function content_wrapper($content_view, $lang_key, $vars = array()) {
 
-	// Load the correct view on the _wrapper
+	// Load the correct view on the _wrapper 
 	$vars['content_view'] = $content_view;
 	$vars['_base'] = $this->_base_url;
 	$vars['_form_base'] = $this->_form_base;

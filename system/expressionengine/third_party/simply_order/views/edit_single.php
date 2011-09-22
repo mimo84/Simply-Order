@@ -50,7 +50,8 @@ echo form_open($form_action, $attributes);
 <ul id="sortable2" class="connectedSortable">
     <li class="ui-state-default">Desidered order.</li>
 </ul>
+
 <input type="text" id="entry_order" name="entry_order" value="" />
 <? // echo form_input('entry_order', ''); ?>
-<? echo form_submit('submit', 'Submit', 'class="submit"'); ?>
+<input type="submit" name="submit" value="Submit" class="submit" onclick="document.getElementById('entry_order').value=maurizio()">
 <? echo form_close(); ?>

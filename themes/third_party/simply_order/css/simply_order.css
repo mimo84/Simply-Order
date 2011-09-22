@@ -20,6 +20,7 @@
 #sortable2 {
     width: 580px;
     border: 1px solid;
+    min-height: 100px;
 }
 
 #sortable1 li, #sortable2 li { 
