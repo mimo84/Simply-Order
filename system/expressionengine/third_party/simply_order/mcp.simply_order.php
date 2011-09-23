@@ -83,8 +83,7 @@ class Simply_order_mcp {
     }
 
     /*
-     * This function is needed to add a new entries ordering.
-     * 
+     * Add new adds a new ordering, with a tag and site_id.
      */
 
     function add_new() {
@@ -111,7 +110,12 @@ class Simply_order_mcp {
 	    return $this->content_wrapper('add_new', 'welcome', $vars);
 	}
     }
-
+    /*
+     * 
+     * Update record shows the interface where peoples can drag and drop elements.
+     * The method calls the "edit_single" method to save data.
+     * 
+     */
     function update_record() {
 
 	$vars['site_id'] = $this->EE->input->get('site_id');
@@ -119,7 +123,8 @@ class Simply_order_mcp {
 
 	$vars['cp_page_title'] = $this->EE->lang->line('edit_single');
 	$vars['form_action'] = $this->_form_base . AMP . 'method=edit_single';
-
+	
+	// This section can be edited: peoples can 
 	$data['site_id'] = '1';
 	$data['channel_id'] = '2';
 
@@ -133,22 +138,43 @@ class Simply_order_mcp {
     }
 
     /*
-     * 
-     * 
+     * edit_single method is called by update_record. It saves entries order in the
+     * "simply_order_tree" table.
      */
 
     function edit_single() {
-
+	/*
+	 *  I have to save: 
+	 *        *  parent_id (actually setted to zero).
+	 *        *  order_by (given by a variable increasing).
+	 *        *  entry_id (the entry_id I'm moving from the default ordering).
+	 *        *  id_simply_order (the relationshipt between each row and the simply_order table).
+	 */
+	// I take the entry_ids from the view, serialized with jQuery.
 	$entry_ids = $this->EE->input->post('entry_order');
-
+	
+	// I take the id_simply_order from an hidden field.
 	$vars['id_simply_order'] = $this->EE->input->post('id_simply');
-
+	$vars['parent_id'] = 0;
+	
+	// I have to delete all entries from the db with the same id_simply_order (if any).
+	$this->EE->db->where('id_simply_order', $vars['id_simply_order']);
+	$query = $this->EE->db->get('simply_order_tree');
+	if($query->num_rows()>0){
+	    $this->EE->db->where('id_simply_order',$vars['id_simply_order']);
+	    $this->EE->db->delete('simply_order_tree');
+	}
+	
+	
+	// Section to explode entry_ids and insert each in the db
 	$coppie = explode("&", $entry_ids);
+	$i = 0;
 	foreach ($coppie as $coppia) {
 	    $coppia_valori = explode("=", $coppia);
-	    $valore = urldecode($coppia_valori[1]);
-	    // eval("$$key = \"$value\";");
-	    echo $valore . " ";
+	    $vars['entry_id'] = urldecode($coppia_valori[1]);
+	    $vars['order_by'] = $i;
+	    $i++;
+	    $this->EE->db->insert('simply_order_tree',$vars);
 	}
 
 
