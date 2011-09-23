@@ -65,7 +65,7 @@ class Simply_order_mcp {
 		$vars['list'][$row['id_simply_order']]['order_tag'] = $row['order_tag'];
 	    }
 
-	    
+
 	    $vars['cp_page_title'] = $this->EE->lang->line('Edit orders');
 	    $vars['form_action'] = $this->_form_base . AMP . 'method=update_record';
 
@@ -131,10 +131,12 @@ class Simply_order_mcp {
 	    $this->index();
 	}
     }
+
     /*
      * 
      * 
      */
+
     function edit_single() {
 
 	$entry_ids = $this->EE->input->post('entry_order');
@@ -149,7 +151,7 @@ class Simply_order_mcp {
 	    echo $valore . " ";
 	}
 
-	
+
 	// return $this->content_wrapper('single_edited', 'edit_single', $vars);
     }
 
