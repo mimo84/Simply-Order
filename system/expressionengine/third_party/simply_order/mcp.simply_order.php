@@ -75,6 +75,7 @@ class Simply_order_mcp {
 	    // automaticamente il form per inserire il primo.
 	    $this->add_new();
 	}
+	
     }
 
     function get_records() {
@@ -176,9 +177,7 @@ class Simply_order_mcp {
 	    $i++;
 	    $this->EE->db->insert('simply_order_tree',$vars);
 	}
-
-
-	// return $this->content_wrapper('single_edited', 'edit_single', $vars);
+	
     }
 
     /*     * ********************************************
