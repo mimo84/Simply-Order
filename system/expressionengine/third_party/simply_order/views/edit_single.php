@@ -1,6 +1,4 @@
-<h1>Insert or remove entries.</h1>
-
-<? echo BASE . $form_action; ?>
+<h1>Drag and drop entries from the left hand side to the right hand side.</h1>
 
 <script type="text/javascript">
     function maurizio(){
@@ -21,8 +19,6 @@
 </script>
 <h3>Current entries in the channel:</h3>
 
-<a onclick="document.getElementById('entry_order').value=maurizio();mimo_alert();">CLICK ME</a>
-
 <ul id="sortable1" class="connectedSortable">
     <li class="ui-state-default">Entries you have:</li>
     <? foreach ($entries->result_array() as $single_one) { ?>
@@ -41,13 +37,15 @@ $attributes = array(
 );
 echo form_open($form_action, $attributes);
 ?>
+<fieldset><legend>Drag and drop elements here:</legend>
 <input type="hidden" name="site_id" value="<? echo $site_id; ?>"/>
 <input type="hidden" name="id_simply" value="<? echo $id_simply; ?>"/>
 <ul id="sortable2" class="connectedSortable">
-    <li class="ui-state-default">Desidered order.</li>
+   
 </ul>
 
-<input type="text" id="entry_order" name="entry_order" value="" />
-<? // echo form_input('entry_order', ''); ?>
+<input type="hidden" id="entry_order" name="entry_order" value="" />
+
 <input type="submit" name="submit" value="Submit" class="submit" onclick="document.getElementById('entry_order').value=maurizio()">
+</fieldset>
 <? echo form_close(); ?>

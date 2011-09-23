@@ -17,13 +17,18 @@ if (!defined('BASEPATH'))
 class Simply_order {
 
     function get() {
+	
         $output = "";
         $this->EE = & get_instance();
+	
+	$ids = $this->EE->TMPL->fetch_param('simply_order');
 
-        $query = $this->EE->db->get('simply_order');
+	$this->EE->db->where('id_simply_order', $ids);
+	$this->EE->db->order_by('order_by','desc ');
+        $query = $this->EE->db->get('simply_order_tree');
 
-        foreach ($query->result() as $row) {
-            $output = $row->entry_id;
+        foreach ($query->result_array() as $row) {
+            $output .= $row['entry_id'] ."|";
         }
 
         return $output;
