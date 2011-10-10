@@ -135,14 +135,17 @@ class Simply_order_mcp {
 	$data['channel_id'] = $vars['channel_id'];
 	$data['id_simply'] = $vars['id_simply'];
 
-	$entries = $this->_get_channel_entries($data);
+	
 	$old_entries = $this->_get_old_order($data);
 	if($old_entries->num_rows > 0){
 	    $vars['old_entries'] = $old_entries;
+	    $vars['entries'] = $this->_get_channel_entries($data);
+	} else {
+	    $vars['entries'] = $this->_get_channel_entries($data);
 	}
 	
-	if ($entries) {
-	    $vars['entries'] = $entries;
+	if ($vars['entries']) {
+	    
 	    return $this->content_wrapper('edit_single', 'edit_single', $vars);
 	} else {
 	    $this->index();
@@ -276,19 +279,10 @@ class Simply_order_mcp {
 	    return $query;
 	}
     }
-    
+    /*
+     * Function to get entries previously submitted on the admin area.
+     */
     private function _get_old_order($data) {
-	
-	/*
-	 * SELECT 
-	    exp_simply_order_tree.entry_id,
-	    exp_channel_titles.title
-	   FROM `exp_simply_order_tree`
-	   JOIN `exp_channel_titles`
-	   ON exp_channel_titles.entry_id = exp_simply_order_tree.entry_id
-	   WHERE exp_simply_order_tree.id_simply_order = $data['id_simply']
-	 * 	
-	 */
 	
 	$this->EE->db->select('simply_order_tree.entry_id, channel_titles.title');
 	$this->EE->db->from('simply_order_tree');
@@ -296,6 +290,14 @@ class Simply_order_mcp {
 	$this->EE->db->where('simply_order_tree.id_simply_order',$data['id_simply']);
 	$query = $this->EE->db->get();
 	return $query;
+    }
+    
+    /*
+     * Function to get entries not ordered
+     */
+    private function _get_exor_entries($data) {
+	
+	
     }
 
     /*
