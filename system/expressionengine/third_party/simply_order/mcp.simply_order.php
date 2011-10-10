@@ -63,6 +63,7 @@ class Simply_order_mcp {
 		$vars['list'][$row['id_simply_order']]['id'] = $row['id_simply_order'];
 		$vars['list'][$row['id_simply_order']]['site_id'] = $row['site_id'];
 		$vars['list'][$row['id_simply_order']]['order_tag'] = $row['order_tag'];
+		$vars['list'][$row['id_simply_order']]['channel_id'] = $row['channel_id'];
 	    }
 
 
@@ -123,14 +124,15 @@ class Simply_order_mcp {
     function update_record() {
 
 	$vars['site_id'] = $this->EE->input->get('site_id');
+	$vars['channel_id'] = $this->EE->input->get('channel_id');
 	$vars['id_simply'] = $this->EE->input->get('id_simply_order');
 
 	$vars['cp_page_title'] = $this->EE->lang->line('edit_single');
 	$vars['form_action'] = $this->_form_base . AMP . 'method=edit_single';
 
 	// This section can be edited: peoples can 
-	$data['site_id'] = '1';
-	$data['channel_id'] = '2';
+	$data['site_id'] = $vars['site_id'];
+	$data['channel_id'] = $vars['channel_id'];
 	$data['id_simply'] = $vars['id_simply'];
 
 	$entries = $this->_get_channel_entries($data);
