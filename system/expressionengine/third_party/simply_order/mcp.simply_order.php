@@ -192,6 +192,10 @@ class Simply_order_mcp {
 	    $this->EE->db->insert('simply_order_tree', $vars);
 	}
     }
+    
+    function delete_ordering() {
+	
+    }
 
     /***********************************************
      * FUNCTIONS TO GET HELP IN OTHER FUNCTIONS	   *
