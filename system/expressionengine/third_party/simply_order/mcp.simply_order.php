@@ -75,7 +75,6 @@ class Simply_order_mcp {
 	    // automaticamente il form per inserire il primo.
 	    $this->add_new();
 	}
-	
     }
 
     function get_records() {
@@ -111,12 +110,14 @@ class Simply_order_mcp {
 	    return $this->content_wrapper('add_new', 'welcome', $vars);
 	}
     }
+
     /*
      * 
      * Update record shows the interface where peoples can drag and drop elements.
      * The method calls the "edit_single" method to save data.
      * 
      */
+
     function update_record() {
 
 	$vars['site_id'] = $this->EE->input->get('site_id');
@@ -124,12 +125,15 @@ class Simply_order_mcp {
 
 	$vars['cp_page_title'] = $this->EE->lang->line('edit_single');
 	$vars['form_action'] = $this->_form_base . AMP . 'method=edit_single';
-	
+
 	// This section can be edited: peoples can 
 	$data['site_id'] = '1';
 	$data['channel_id'] = '2';
+	$data['id_simply'] = $vars['id_simply'];
 
 	$entries = $this->_get_channel_entries($data);
+	
+	
 	if ($entries) {
 	    $vars['entries'] = $entries;
 	    return $this->content_wrapper('edit_single', 'edit_single', $vars);
@@ -137,7 +141,7 @@ class Simply_order_mcp {
 	    $this->index();
 	}
     }
-
+	
     /*
      * edit_single method is called by update_record. It saves entries order in the
      * "simply_order_tree" table.
@@ -153,20 +157,20 @@ class Simply_order_mcp {
 	 */
 	// I take the entry_ids from the view, serialized with jQuery.
 	$entry_ids = $this->EE->input->post('entry_order');
-	
+
 	// I take the id_simply_order from an hidden field.
 	$vars['id_simply_order'] = $this->EE->input->post('id_simply');
 	$vars['parent_id'] = 0;
-	
+
 	// I have to delete all entries from the db with the same id_simply_order (if any).
 	$this->EE->db->where('id_simply_order', $vars['id_simply_order']);
 	$query = $this->EE->db->get('simply_order_tree');
-	if($query->num_rows()>0){
-	    $this->EE->db->where('id_simply_order',$vars['id_simply_order']);
+	if ($query->num_rows() > 0) {
+	    $this->EE->db->where('id_simply_order', $vars['id_simply_order']);
 	    $this->EE->db->delete('simply_order_tree');
 	}
-	
-	
+
+
 	// Section to explode entry_ids and insert each in the db
 	$coppie = explode("&", $entry_ids);
 	$i = 0;
@@ -175,14 +179,13 @@ class Simply_order_mcp {
 	    $vars['entry_id'] = urldecode($coppia_valori[1]);
 	    $vars['order_by'] = $i;
 	    $i++;
-	    $this->EE->db->insert('simply_order_tree',$vars);
+	    $this->EE->db->insert('simply_order_tree', $vars);
 	}
-	
     }
 
-    /*     * ********************************************
-     * FUNCTIONS TO GET HELP IN OTHER FUNCTIONS
-     * ******************************************** */
+    /***********************************************
+     * FUNCTIONS TO GET HELP IN OTHER FUNCTIONS	   *
+     ***********************************************/
 
     /*
      * New content wrapper to call the view file.
@@ -254,7 +257,7 @@ class Simply_order_mcp {
      * This function return a list of entries from a given site and channel.
      */
 
-    private function _get_channel_entries($data) {
+     private function _get_channel_entries($data) {
 
 	$this->EE->db->where('channel_id', $data['channel_id']);
 	$this->EE->db->where('site_id', $data['site_id']);
