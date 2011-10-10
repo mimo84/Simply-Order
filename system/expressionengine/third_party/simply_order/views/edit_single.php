@@ -38,22 +38,26 @@ $attributes = array(
 echo form_open($form_action, $attributes);
 ?>
 <fieldset><legend>Drag and drop elements here:</legend>
-<input type="hidden" name="site_id" value="<? echo $site_id; ?>"/>
-<input type="hidden" name="id_simply" value="<? echo $id_simply; ?>"/>
-<ul id="sortable2" class="connectedSortable">
-   <? foreach($old_entries->result_array() as $old_entry) {  ?>
-        <li id="entry_id_<? echo $old_entry['entry_id']; ?>" class="ui-state-default">
-	    <?
-	    echo form_hidden('entry_id', $old_entry['entry_id']);
-	    echo form_input('title', $old_entry['title'], 'readonly');
-	    ?>
-        </li>
-    
-    <? } ?>
-</ul>
+    <input type="hidden" name="site_id" value="<? echo $site_id; ?>"/>
+    <input type="hidden" name="id_simply" value="<? echo $id_simply; ?>"/>
+    <ul id="sortable2" class="connectedSortable">
+	<?
+	if (isset($old_entries) && $old_entries) {
+	    foreach ($old_entries->result_array() as $old_entry) {
+		?>
+	        <li id="entry_id_<? echo $old_entry['entry_id']; ?>" class="ui-state-default">
+		    <?
+		    echo form_hidden('entry_id', $old_entry['entry_id']);
+		    echo form_input('title', $old_entry['title'], 'readonly');
+		    ?>
+	        </li>
 
-<input type="hidden" id="entry_order" name="entry_order" value="" />
+	    <? }
+	} ?>
+    </ul>
 
-<input type="submit" name="submit" value="Submit" class="submit" onclick="document.getElementById('entry_order').value=maurizio()">
+    <input type="hidden" id="entry_order" name="entry_order" value="" />
+
+    <input type="submit" name="submit" value="Submit" class="submit" onclick="document.getElementById('entry_order').value=maurizio()">
 </fieldset>
 <? echo form_close(); ?>

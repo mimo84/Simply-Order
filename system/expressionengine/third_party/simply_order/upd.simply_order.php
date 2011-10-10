@@ -65,6 +65,10 @@ class Simply_order_upd {
 		'type' => 'INT',
 		'constraint' => '100',
 	    ),
+	    'channel_id' => array(
+		'type' => 'INT',
+		'constraint' => '100'
+	    )
 	);
 
 	$this->EE->dbforge->add_field($fields);

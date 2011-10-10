@@ -9,6 +9,9 @@
 	<? echo form_input('order_tag', 'Order Tag'); ?>
     </div>
     <div class="simply_order_form_row">
+	<? echo form_input('channel_id', 'Channel ID'); ?>
+    </div>
+    <div class="simply_order_form_row">
 	<? echo form_input('site_id', 'Site ID'); ?>
     </div>
     <div class="simply_order_form_row">
@@ -19,6 +22,6 @@
     </div>
 </div>
 <? } else { ?>
-<h2>Tutt'appost</h2>
+<h2>New ordering created.</h2>
 
 <? } ?>

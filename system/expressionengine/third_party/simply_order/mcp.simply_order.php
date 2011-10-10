@@ -90,6 +90,7 @@ class Simply_order_mcp {
 
 	$this->EE->form_validation->set_rules('order_tag', 'required');
 	$this->EE->form_validation->set_rules('site_id', 'required');
+	$this->EE->form_validation->set_rules('channel_id', 'required');
 
 	if ($this->EE->form_validation->run() == FALSE) {
 	    // Definisco la variabile da passare alla vista
@@ -101,6 +102,7 @@ class Simply_order_mcp {
 	    return $this->content_wrapper('add_new', 'welcome', $vars);
 	} else {
 
+	    $data['channel_id'] = $this->EE->input->post('channel_id');
 	    $data['order_tag'] = $this->EE->input->post('order_tag');
 	    $data['site_id'] = $this->EE->input->post('site_id');
 	    $vars['query'] = $this->EE->db->insert('simply_order', $data);
