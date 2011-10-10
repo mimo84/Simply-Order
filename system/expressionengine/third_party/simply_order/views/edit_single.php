@@ -41,7 +41,15 @@ echo form_open($form_action, $attributes);
 <input type="hidden" name="site_id" value="<? echo $site_id; ?>"/>
 <input type="hidden" name="id_simply" value="<? echo $id_simply; ?>"/>
 <ul id="sortable2" class="connectedSortable">
-   
+   <? foreach($old_entries->result_array() as $old_entry) {  ?>
+        <li id="entry_id_<? echo $old_entry['entry_id']; ?>" class="ui-state-default">
+	    <?
+	    echo form_hidden('entry_id', $old_entry['entry_id']);
+	    echo form_input('title', $old_entry['title'], 'readonly');
+	    ?>
+        </li>
+    
+    <? } ?>
 </ul>
 
 <input type="hidden" id="entry_order" name="entry_order" value="" />

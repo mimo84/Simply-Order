@@ -132,7 +132,10 @@ class Simply_order_mcp {
 	$data['id_simply'] = $vars['id_simply'];
 
 	$entries = $this->_get_channel_entries($data);
-	
+	$old_entries = $this->_get_old_order($data);
+	if($old_entries->num_rows > 0){
+	    $vars['old_entries'] = $old_entries;
+	}
 	
 	if ($entries) {
 	    $vars['entries'] = $entries;
@@ -268,6 +271,27 @@ class Simply_order_mcp {
 	} else {
 	    return $query;
 	}
+    }
+    
+    private function _get_old_order($data) {
+	
+	/*
+	 * SELECT 
+	    exp_simply_order_tree.entry_id,
+	    exp_channel_titles.title
+	   FROM `exp_simply_order_tree`
+	   JOIN `exp_channel_titles`
+	   ON exp_channel_titles.entry_id = exp_simply_order_tree.entry_id
+	   WHERE exp_simply_order_tree.id_simply_order = $data['id_simply']
+	 * 	
+	 */
+	
+	$this->EE->db->select('simply_order_tree.entry_id, channel_titles.title');
+	$this->EE->db->from('simply_order_tree');
+	$this->EE->db->join('channel_titles','channel_titles.entry_id = simply_order_tree.entry_id');
+	$this->EE->db->where('simply_order_tree.id_simply_order',$data['id_simply']);
+	$query = $this->EE->db->get();
+	return $query;
     }
 
     /*
