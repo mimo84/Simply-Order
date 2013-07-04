@@ -1,27 +1,27 @@
 <h1>Add New Entries Order</h1>
 
-<? if (! isset($query)) { ?>
+<?php if (! isset($query)) { ?>
 <div id="add_new_order_form">
     <div class="simply_order_form_row">
-	<? echo form_open($form_action); ?>
+	<?php echo form_open($form_action); ?>
     </div>
     <div class="simply_order_form_row">
-	<? echo form_input('order_tag', 'Order Tag'); ?>
+	<?php echo form_input('order_tag', 'Order Tag'); ?>
     </div>
     <div class="simply_order_form_row">
-	<? echo form_input('channel_id', 'Channel ID'); ?>
+	<?php echo form_input('channel_id', 'Channel ID'); ?>
     </div>
     <div class="simply_order_form_row">
-	<? echo form_input('site_id', 'Site ID'); ?>
+	<?php echo form_input('site_id', 'Site ID'); ?>
     </div>
     <div class="simply_order_form_row">
-	<? echo form_submit('submit', 'Submit', 'class="submit"'); ?>
+	<?php echo form_submit('submit', 'Submit', 'class="submit"'); ?>
     </div>
     <div class="simply_order_form_row">
-	<? echo form_close(); ?>
+	<?php echo form_close(); ?>
     </div>
 </div>
-<? } else { ?>
+<?php } else { ?>
 <h2>New ordering created.</h2>
 
-<? } ?>
+<?php } ?>

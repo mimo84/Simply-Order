@@ -1,5 +1,5 @@
 <div id="simply_order_wrapper">
 
-    <?= $this->load->view($content_view); ?>
+    <?php echo $this->load->view($content_view); ?>
 
 </div>

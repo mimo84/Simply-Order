@@ -44,7 +44,7 @@
 </SCRIPT>
 <h1>Simply Order - Entries Order</h1>
 
-<? echo form_open($form_action); ?>
+<?php echo form_open($form_action); ?>
 <INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />
  
     <INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" />
@@ -57,6 +57,6 @@
         </TR>
     </TABLE>
     
-    <?=form_submit('submit', 'submit', 'class="submit"')?>
+    <?php echo form_submit('submit', 'submit', 'class="submit"')?>
     
-    <? echo form_close(); ?>
+    <?php echo form_close(); ?>
