@@ -1,6 +1,6 @@
 <h1>Select the ordering you would like to edit.</h1>
 
-<?
+<?php 
 $this->table->set_heading('Name', 'Click below to edit!','','');
 foreach ($list as $single) {
 
