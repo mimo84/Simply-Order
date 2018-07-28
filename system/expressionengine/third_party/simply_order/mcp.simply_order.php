@@ -192,10 +192,6 @@ class Simply_order_mcp {
 	    $this->EE->db->insert('simply_order_tree', $vars);
 	}
     }
-    
-    function delete_ordering() {
-	
-    }
 
     /***********************************************
      * FUNCTIONS TO GET HELP IN OTHER FUNCTIONS	   *
@@ -220,7 +216,8 @@ class Simply_order_mcp {
 	$title_extra = (isset($vars['title_extra'])) ? ': ' . $vars['title_extra'] : '';
 
 	// Lang key is required to know which key take from the language file.
-	$this->EE->cp->set_variable('cp_page_title', lang($lang_key) . $title_extra);
+	// $this->EE->cp->set_variable('cp_page_title', lang($lang_key) . $title_extra);
+	ee()->view->cp_page_title = $this->EE->lang->line('cp_page_title');
 
 	// To make the breadcrumb management easier, I define it one time here.
 	$this->EE->cp->set_breadcrumb($this->_base_url, lang('simply_order_module_name'));
@@ -272,28 +269,35 @@ class Simply_order_mcp {
      */
 
      private function _get_channel_entries($data) {
-
-	$this->EE->db->where('channel_id', $data['channel_id']);
-	$this->EE->db->where('site_id', $data['site_id']);
-	$query = $this->EE->db->get('channel_titles');
-
+	$this->EE->db->select('channel_data.entry_id,
+						   channel_data.field_id_18,
+						   channel_titles.title');
+	$this->EE->db->from('channel_titles');
+	$this->EE->db->join('channel_data','channel_data.entry_id = channel_titles.entry_id');
+	$this->EE->db->where('channel_titles.channel_id',$data['channel_id']);
+	$query = $this->EE->db->get();
+	
 	if ($query->num_rows() == 0) {
 	    return FALSE;
 	} else {
 	    return $query;
 	}
+	
     }
     /*
      * Function to get entries previously submitted on the admin area.
      */
     private function _get_old_order($data) {
 	
-	$this->EE->db->select('simply_order_tree.entry_id, channel_titles.title');
+	$this->EE->db->select('simply_order_tree.entry_id, channel_titles.title, channel_data.field_id_18');
 	$this->EE->db->from('simply_order_tree');
 	$this->EE->db->join('channel_titles','channel_titles.entry_id = simply_order_tree.entry_id');
 	$this->EE->db->where('simply_order_tree.id_simply_order',$data['id_simply']);
+	$this->EE->db->join('channel_data','channel_data.entry_id = simply_order_tree.entry_id');
+	$this->EE->db->order_by('order_by', 'asc');
 	$query = $this->EE->db->get();
 	return $query;
+	
     }
     
     /*

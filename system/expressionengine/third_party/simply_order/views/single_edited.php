@@ -1,5 +1,5 @@
 <pre>
-<?php 
+<?php
 print_r($entry_id);
 ?>
 </pre>
